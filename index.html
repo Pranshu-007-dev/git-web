@@ -1,0 +1,1104 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080713">
+<meta name="description" content="Beyond the Frame — the personal universe of Pranshu, ECE student, programmer, and future AI builder.">
+<title>BEYOND THE FRAME — Pranshu</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg: #080713;
+  --panel: rgba(19, 17, 39, .68);
+  --line: rgba(183, 166, 255, .15);
+  --text: #f4f0ff;
+  --muted: #a6a0bf;
+  --purple: #a78bfa;
+  --blue: #64c7ff;
+  --pink: #ee9bff;
+  --mono: "DM Mono", monospace;
+  --sans: "Space Grotesk", sans-serif;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; scroll-padding-top: 95px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(ellipse at 15% 10%, rgba(96, 55, 177, .15), transparent 38%),
+    radial-gradient(ellipse at 85% 35%, rgba(32, 91, 168, .12), transparent 38%),
+    radial-gradient(ellipse at 50% 100%, rgba(104, 51, 166, .12), transparent 42%);
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; }
+::selection { background: rgba(167,139,250,.35); color: white; }
+
+#starfield, #cosmic-confetti {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+#starfield { z-index: -1; }
+#cosmic-confetti { z-index: 100; }
+
+.noise {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  pointer-events: none;
+  opacity: .025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+}
+
+.nav {
+  position: fixed;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  width: min(1100px, calc(100% - 28px));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 12px 18px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: rgba(9, 8, 23, .76);
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+.brand {
+  font-weight: 700;
+  font-size: .88rem;
+  letter-spacing: .14em;
+  white-space: nowrap;
+}
+.brand span { color: var(--purple); }
+.nav-links { display: flex; gap: 23px; align-items: center; }
+.nav-links a {
+  color: var(--muted);
+  font-size: .8rem;
+  transition: color .2s;
+}
+.nav-links a:hover { color: white; }
+.nav-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #c9c1e5;
+  font: .67rem var(--mono);
+  white-space: nowrap;
+}
+.status-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: #7fffc2;
+  box-shadow: 0 0 12px #7fffc2;
+}
+
+main { width: min(1100px, calc(100% - 40px)); margin: auto; }
+.hero {
+  min-height: 100svh;
+  padding: 130px 0 70px;
+  display: grid;
+  grid-template-columns: 1.02fr .98fr;
+  align-items: center;
+  gap: 25px;
+  position: relative;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font: .7rem var(--mono);
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--blue);
+  margin-bottom: 23px;
+}
+.eyebrow::before {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: var(--blue);
+  box-shadow: 0 0 10px var(--blue);
+}
+.hero h1 {
+  font-size: clamp(3.1rem, 6.6vw, 6.1rem);
+  line-height: .99;
+  letter-spacing: -.075em;
+  font-weight: 600;
+}
+.hero h1 .gradient {
+  background: linear-gradient(105deg, #c4a9ff 5%, #8e9eff 48%, #6dd9ff 92%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-copy {
+  max-width: 465px;
+  margin-top: 25px;
+  color: var(--muted);
+  font-size: 1rem;
+}
+.hero-copy strong { color: #e8e0ff; font-weight: 500; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 29px; }
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 17px;
+  color: var(--text);
+  font-size: .85rem;
+  cursor: pointer;
+  transition: transform .2s, border-color .2s, background .2s;
+}
+.btn:hover { transform: translateY(-3px); border-color: rgba(167,139,250,.65); }
+.btn.primary {
+  background: linear-gradient(110deg, #9270ec, #596fe1);
+  border-color: transparent;
+  box-shadow: 0 8px 30px rgba(109, 87, 224, .23);
+}
+.btn.secondary { background: rgba(255,255,255,.035); }
+.hero-note {
+  margin-top: 24px;
+  font: .68rem var(--mono);
+  color: #77718f;
+  letter-spacing: .04em;
+}
+
+.planet-stage {
+  position: relative;
+  min-width: 0;
+  aspect-ratio: 1 / 1;
+  max-height: 560px;
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+#planet-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  cursor: grab;
+  touch-action: pan-y;
+}
+#planet-canvas:active { cursor: grabbing; }
+.planet-aura {
+  position: absolute;
+  width: 68%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(105,91,255,.2), rgba(70,118,255,.06) 45%, transparent 72%);
+  filter: blur(12px);
+  animation: aura 5s ease-in-out infinite alternate;
+}
+@keyframes aura { to { transform: scale(1.15); opacity: .6; } }
+.orbit {
+  position: absolute;
+  width: 92%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(177,163,255,.15);
+  border-radius: 50%;
+  transform: rotateX(67deg) rotate(-25deg);
+}
+.orbit.two {
+  width: 105%;
+  border-color: rgba(100,199,255,.11);
+  transform: rotateX(69deg) rotate(52deg);
+}
+.planet-label {
+  position: absolute;
+  z-index: 5;
+  padding: 11px 14px;
+  border: 1px solid var(--line);
+  background: rgba(11,10,28,.78);
+  backdrop-filter: blur(14px);
+  border-radius: 12px;
+  font: .65rem var(--mono);
+  color: #d9d0ff;
+  box-shadow: 0 10px 30px rgba(0,0,0,.16);
+}
+.planet-label small { display: block; color: #77718f; font-size: .57rem; margin-top: 2px; }
+.label-top { top: 13%; right: 0; }
+.label-bottom { bottom: 14%; left: 1%; }
+.planet-tip {
+  position: absolute;
+  z-index: 5;
+  bottom: 4%;
+  right: 2%;
+  font: .59rem var(--mono);
+  color: #77718f;
+}
+
+.section { padding: 100px 0; }
+.section-head { margin-bottom: 34px; }
+.kicker {
+  color: var(--blue);
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  font: .68rem var(--mono);
+  margin-bottom: 12px;
+}
+.section h2 {
+  font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+  letter-spacing: -.06em;
+  line-height: 1.1;
+  font-weight: 600;
+}
+.section-intro { max-width: 600px; color: var(--muted); margin-top: 15px; }
+
+.glass {
+  background: linear-gradient(135deg, rgba(31,27,57,.72), rgba(14,13,32,.68));
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  box-shadow: 0 18px 70px rgba(0,0,0,.12);
+}
+.about-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: 18px; }
+.about-card { padding: 30px; }
+.about-card p { color: var(--muted); margin-top: 13px; }
+.about-card p strong { color: #e6ddff; font-weight: 500; }
+.mini-facts { display: grid; gap: 13px; }
+.fact { padding: 20px 22px; }
+.fact-label { color: #807a9c; font: .65rem var(--mono); text-transform: uppercase; letter-spacing: .1em; }
+.fact-value { font-size: 1.02rem; margin-top: 5px; }
+
+.skills-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 15px; }
+.skill-card { padding: 24px; transition: transform .25s, border-color .25s; }
+.skill-card:hover { transform: translateY(-5px); border-color: rgba(167,139,250,.4); }
+.skill-icon {
+  width: 44px; height: 44px;
+  display: grid; place-items: center;
+  border-radius: 13px;
+  background: rgba(167,139,250,.12);
+  border: 1px solid rgba(167,139,250,.17);
+  color: #c9b8ff;
+  font-size: 1.2rem;
+  margin-bottom: 19px;
+}
+.skill-card h3 { font-size: 1rem; margin-bottom: 8px; }
+.skill-card p { font-size: .85rem; color: var(--muted); }
+.tag-row { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 17px; }
+.tag {
+  font: .64rem var(--mono);
+  color: #c3b7ed;
+  padding: 5px 9px;
+  border: 1px solid rgba(167,139,250,.17);
+  background: rgba(167,139,250,.06);
+  border-radius: 7px;
+}
+
+.journey { display: grid; grid-template-columns: .7fr 1.3fr; gap: 25px; }
+.journey-aside { padding: 28px; align-self: start; }
+.journey-aside .big-number {
+  font-size: 3.3rem;
+  letter-spacing: -.08em;
+  background: linear-gradient(130deg, #c5a7ff, #64c7ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.journey-aside p { color: var(--muted); font-size: .9rem; margin-top: 7px; }
+.timeline { padding: 10px 0 10px 24px; }
+.timeline-item {
+  position: relative;
+  padding: 0 0 29px 25px;
+  border-left: 1px solid rgba(167,139,250,.25);
+}
+.timeline-item:last-child { border-left-color: transparent; padding-bottom: 0; }
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--purple);
+  left: -4.5px; top: 8px;
+  box-shadow: 0 0 13px rgba(167,139,250,.8);
+}
+.timeline-item .date { color: var(--blue); font: .65rem var(--mono); }
+.timeline-item h3 { font-size: 1rem; margin: 5px 0; }
+.timeline-item p { color: var(--muted); font-size: .86rem; }
+
+.ai-panel { padding: 32px; position: relative; overflow: hidden; }
+.ai-panel::after {
+  content: "";
+  position: absolute;
+  width: 230px; height: 230px;
+  right: -70px; top: -110px;
+  border-radius: 50%;
+  background: rgba(105,85,255,.12);
+  filter: blur(30px);
+  pointer-events: none;
+}
+.ai-top { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; }
+.ai-status {
+  color: #8fffd0;
+  border: 1px solid rgba(143,255,208,.2);
+  background: rgba(143,255,208,.05);
+  border-radius: 8px;
+  padding: 6px 9px;
+  font: .63rem var(--mono);
+}
+.ai-panel h3 { font-size: clamp(1.5rem,3vw,2.1rem); margin-top: 19px; letter-spacing: -.04em; }
+.ai-panel > p { max-width: 670px; color: var(--muted); margin-top: 10px; }
+.ai-ideas { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-top: 24px; }
+.ai-idea { padding: 17px; border: 1px solid var(--line); background: rgba(255,255,255,.025); border-radius: 13px; }
+.ai-idea b { display: block; font-size: .84rem; margin-bottom: 5px; }
+.ai-idea span { font-size: .77rem; color: var(--muted); }
+
+.contact-grid { display: grid; grid-template-columns: 1fr .85fr; gap: 18px; }
+.contact-main { padding: 30px; }
+.contact-main p { color: var(--muted); margin: 13px 0 24px; }
+.contact-email {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 15px;
+  border-radius: 11px;
+  border: 1px solid rgba(167,139,250,.25);
+  background: rgba(167,139,250,.07);
+  font-size: .9rem;
+  overflow-wrap: anywhere;
+}
+.contact-aside { padding: 27px; }
+.contact-aside h3 { font-size: 1rem; }
+.contact-aside p { color: var(--muted); font-size: .87rem; margin-top: 10px; }
+.contact-aside .tag-row { margin-top: 18px; }
+
+footer {
+  border-top: 1px solid rgba(167,139,250,.1);
+  padding: 25px 20px 32px;
+  display: flex; justify-content: space-between; align-items: center; gap: 15px;
+  width: min(1100px, calc(100% - 40px)); margin: auto;
+  color: #77718f; font: .66rem var(--mono);
+}
+footer span:last-child { color: #9b91bd; }
+
+.reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+#cursor-glow {
+  position: fixed; width: 240px; height: 240px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(116,93,255,.075), transparent 68%);
+  transform: translate(-50%,-50%);
+  pointer-events: none; z-index: 0;
+}
+#sound-toggle {
+  position: fixed; bottom: 20px; right: 20px; z-index: 40;
+  border: 1px solid var(--line); background: rgba(13,11,30,.82);
+  backdrop-filter: blur(12px); color: #c5b8f2; border-radius: 12px;
+  padding: 10px 13px; cursor: pointer; font: .65rem var(--mono);
+  transition: border-color .2s, transform .2s;
+}
+#sound-toggle:hover { border-color: rgba(167,139,250,.5); transform: translateY(-2px); }
+#toast {
+  position: fixed; bottom: 72px; right: 20px; z-index: 80;
+  padding: 11px 15px; border-radius: 10px;
+  background: rgba(21,18,45,.95); border: 1px solid var(--line);
+  color: #ddd4ff; font: .72rem var(--mono);
+  opacity: 0; transform: translateY(8px); transition: .25s;
+  pointer-events: none;
+}
+#toast.show { opacity: 1; transform: translateY(0); }
+
+@media (pointer: fine) {
+  body, a, button { cursor: default; }
+  a, button { cursor: pointer; }
+}
+@media (max-width: 800px) {
+  .nav { top: 9px; padding: 11px 13px; }
+  .nav-links { gap: 13px; }
+  .nav-links a { font-size: .72rem; }
+  .nav-status { display: none; }
+  .hero { grid-template-columns: 1fr; padding-top: 135px; gap: 0; }
+  .hero-copy { max-width: 540px; }
+  .planet-stage { width: min(100%, 510px); margin: 10px auto 0; }
+  .about-grid, .journey, .contact-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: repeat(2,1fr); }
+  .journey { gap: 18px; }
+}
+@media (max-width: 520px) {
+  main { width: calc(100% - 30px); }
+  .nav { width: calc(100% - 18px); border-radius: 14px; }
+  .brand { font-size: .75rem; letter-spacing: .1em; }
+  .nav-links { gap: 10px; }
+  .nav-links a { font-size: .67rem; }
+  .nav-links a:nth-child(3) { display: none; }
+  .hero { min-height: auto; padding: 145px 0 40px; }
+  .hero h1 { font-size: clamp(3.1rem, 15vw, 4.6rem); }
+  .hero-copy { font-size: .92rem; }
+  .planet-stage { margin-top: 20px; }
+  .planet-label { font-size: .58rem; padding: 8px 10px; }
+  .section { padding: 70px 0; }
+  .skills-grid { grid-template-columns: 1fr; }
+  .about-card, .ai-panel, .contact-main { padding: 23px; }
+  .ai-ideas { grid-template-columns: 1fr; }
+  .journey-aside { padding: 23px; }
+  footer { width: calc(100% - 30px); flex-direction: column; align-items: flex-start; }
+  #cursor-glow { display: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
+</style>
+</head>
+
+<body>
+<canvas id="starfield" aria-hidden="true"></canvas>
+<canvas id="cosmic-confetti" aria-hidden="true"></canvas>
+<div class="noise" aria-hidden="true"></div>
+<div id="cursor-glow" aria-hidden="true"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<nav class="nav" aria-label="Main navigation">
+  <a class="brand" href="#home">BEYOND <span>THE FRAME.</span></a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#journey">Journey</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-status"><span class="status-dot"></span> EXPLORING</div>
+</nav>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <div class="eyebrow">A little universe of my own</div>
+      <h1>BEYOND<br>THE <span class="gradient">FRAME.</span></h1>
+      <p class="hero-copy">
+        Hey, I'm <strong>Pranshu</strong> — an ECE student, a curious builder,
+        and a human who likes asking <strong>“what if?”</strong>
+        This is where code, creativity, and a little cosmic chaos meet.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#about" data-burst>Explore my universe <span>↗</span></a>
+        <a class="btn secondary" href="#contact">Let's connect <span>✳</span></a>
+      </div>
+      <p class="hero-note">FIRST YEAR ECE · SVIT VASAD · INFINITE CURIOSITY</p>
+    </div>
+
+    <div class="planet-stage" aria-label="Interactive 3D purple planet. Drag to explore.">
+      <div class="planet-aura"></div>
+      <div class="orbit"></div>
+      <div class="orbit two"></div>
+      <canvas id="planet-canvas"></canvas>
+      <div class="planet-label label-top">UNKNOWN / 001<small>World in progress</small></div>
+      <div class="planet-label label-bottom">IDEAS → REALITY<small>One experiment at a time</small></div>
+      <div class="planet-tip">DRAG TO ROTATE · MOVE TO EXPLORE</div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="about">
+    <div class="section-head">
+      <div class="kicker">01 / The person behind the pixels</div>
+      <h2>Curious by nature.<br><span class="gradient">Builder by choice.</span></h2>
+      <p class="section-intro">I don't have everything figured out — and honestly, that's the exciting part.</p>
+    </div>
+    <div class="about-grid">
+      <article class="glass about-card">
+        <div class="eyebrow">My little origin story</div>
+        <p>I'm currently in my <strong>first year of Electronics and Communication Engineering at SVIT Vasad.</strong></p>
+        <p>I'm learning to turn ideas into things that actually work — from writing code to exploring electronics and creating websites that feel a little different.</p>
+        <p>I like games, experimenting with new things, and imagining what technology could become. My biggest long-term ambition? Building a <strong>personal AI I can truly customize</strong> to fit the way I think and work.</p>
+        <p>This website is a snapshot of the journey, not the finish line.</p>
+      </article>
+      <div class="mini-facts">
+        <article class="glass fact">
+          <div class="fact-label">Current mission</div>
+          <div class="fact-value">Learn. Experiment. Repeat.</div>
+        </article>
+        <article class="glass fact">
+          <div class="fact-label">Favorite playgrounds</div>
+          <div class="fact-value">Code · Games · Electronics</div>
+        </article>
+        <article class="glass fact">
+          <div class="fact-label">Long-term vision</div>
+          <div class="fact-value">A truly personal AI</div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="skills">
+    <div class="section-head">
+      <div class="kicker">02 / My current toolkit</div>
+      <h2>Learning the <span class="gradient">building blocks.</span></h2>
+      <p class="section-intro">A growing toolkit. Some things I've studied, some I'm learning, and others I'm just beginning to explore.</p>
+    </div>
+    <div class="skills-grid">
+      <article class="glass skill-card">
+        <div class="skill-icon">&lt;/&gt;</div>
+        <h3>Programming</h3>
+        <p>Learning how to think logically, solve problems, and turn ideas into code.</p>
+        <div class="tag-row"><span class="tag">C · Learned</span><span class="tag">C++ · Learning</span><span class="tag">Python · Learning</span></div>
+      </article>
+      <article class="glass skill-card">
+        <div class="skill-icon">◈</div>
+        <h3>Web & Creative Tech</h3>
+        <p>Interested in making digital spaces that are useful, expressive, and fun to explore.</p>
+        <div class="tag-row"><span class="tag">Websites</span><span class="tag">UI ideas</span><span class="tag">Experimenting</span></div>
+      </article>
+      <article class="glass skill-card">
+        <div class="skill-icon">⌘</div>
+        <h3>Electronics</h3>
+        <p>Exploring the tiny computers and boards that connect software to the real world.</p>
+        <div class="tag-row"><span class="tag">Arduino</span><span class="tag">ESP32</span><span class="tag">Raspberry Pi</span></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section reveal" id="journey">
+    <div class="section-head">
+      <div class="kicker">03 / The progress log</div>
+      <h2>Not there yet.<br><span class="gradient">Getting there.</span></h2>
+      <p class="section-intro">A work in progress, by design. The best part of learning is having somewhere new to go.</p>
+    </div>
+    <div class="journey">
+      <aside class="glass journey-aside">
+        <div class="kicker">Status / 2026</div>
+        <div class="big-number">01<span style="font-size:1.3rem">+</span></div>
+        <h3>Chapter one.</h3>
+        <p>Building foundations in programming and electronics while exploring what I want to create next.</p>
+      </aside>
+      <div class="timeline">
+        <article class="timeline-item">
+          <div class="date">FOUNDATIONS</div>
+          <h3>Learning C</h3>
+          <p>Building an understanding of programming fundamentals and logical thinking.</p>
+        </article>
+        <article class="timeline-item">
+          <div class="date">IN PROGRESS</div>
+          <h3>Exploring C++ and Python</h3>
+          <p>Growing my programming toolkit one concept and one practice session at a time.</p>
+        </article>
+        <article class="timeline-item">
+          <div class="date">EXPLORATION</div>
+          <h3>Electronics & the web</h3>
+          <p>Learning about Arduino, ESP32, Raspberry Pi, and the possibilities of building on the web.</p>
+        </article>
+        <article class="timeline-item">
+          <div class="date">LONG-TERM MISSION</div>
+          <h3>Building my own personal AI</h3>
+          <p>Working toward the knowledge needed to create a flexible AI assistant that feels truly personal.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="ai">
+    <div class="section-head">
+      <div class="kicker">04 / A future idea</div>
+      <h2>An AI that's <span class="gradient">actually mine.</span></h2>
+      <p class="section-intro">Not a finished product. A direction I'm excited to explore.</p>
+    </div>
+    <div class="glass ai-panel">
+      <div class="ai-top">
+        <div class="eyebrow" style="margin:0">Project concept / 001</div>
+        <span class="ai-status">VISION STAGE</span>
+      </div>
+      <h3>Personal AI · Built around me.</h3>
+      <p>I'd love to create an AI assistant I can customize — one that fits my workflow, helps me learn, supports my projects, and grows as I do. First comes learning the fundamentals; the bigger vision can follow.</p>
+      <div class="ai-ideas">
+        <div class="ai-idea"><b>01 / Customize</b><span>Shape its tools, interface, and behavior around my needs.</span></div>
+        <div class="ai-idea"><b>02 / Connect</b><span>Explore ways to connect code, devices, and useful workflows.</span></div>
+        <div class="ai-idea"><b>03 / Evolve</b><span>Keep improving it as my skills and ideas grow.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section reveal" id="contact">
+    <div class="section-head">
+      <div class="kicker">05 / Open a portal</div>
+      <h2>Got an idea?<br><span class="gradient">Let's talk.</span></h2>
+      <p class="section-intro">I'm always up for learning something new, sharing ideas, or talking about tech.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="glass contact-main">
+        <div class="eyebrow">The universe isn't that big</div>
+        <h3 style="font-size:1.5rem;letter-spacing:-.04em">One message can start something.</h3>
+        <p>Want to chat about programming, electronics, websites, games, or ambitious AI ideas? Drop me a message.</p>
+        <a class="contact-email" href="mailto:pranshujadav40@gmail.com" data-burst>
+          <span>✉</span> pranshujadav40@gmail.com <span>↗</span>
+        </a>
+      </div>
+      <aside class="glass contact-aside">
+        <h3>Currently open to</h3>
+        <p>Interesting conversations, learning opportunities, creative experiments, and meeting people who enjoy building things.</p>
+        <div class="tag-row">
+          <span class="tag">Tech</span><span class="tag">Learning</span><span class="tag">Ideas</span><span class="tag">Collaboration</span>
+        </div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>© <span id="year"></span> PRANSHU</span>
+  <span>MADE OF CURIOSITY & COSMIC DUST ✳</span>
+</footer>
+
+<button id="sound-toggle" type="button" aria-pressed="false" title="Toggle subtle ambient sound">♫ SOUND: OFF</button>
+
+<script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+<script>
+(() => {
+  "use strict";
+
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isTouch = matchMedia("(pointer: coarse)").matches;
+  const $ = (selector) => document.querySelector(selector);
+
+  $("#year").textContent = new Date().getFullYear();
+
+  // ---------------- STARFIELD ----------------
+  const starCanvas = $("#starfield");
+  const starCtx = starCanvas.getContext("2d");
+  let stars = [];
+  let sw = 0, sh = 0, dpr = 1;
+
+  function resizeStars() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    sw = window.innerWidth;
+    sh = window.innerHeight;
+    starCanvas.width = sw * dpr;
+    starCanvas.height = sh * dpr;
+    starCanvas.style.width = sw + "px";
+    starCanvas.style.height = sh + "px";
+    starCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const count = Math.min(180, Math.floor(sw * sh / 6500));
+    stars = Array.from({ length: count }, () => ({
+      x: Math.random() * sw,
+      y: Math.random() * sh,
+      r: Math.random() * 1.35 + .2,
+      a: Math.random() * .6 + .15,
+      phase: Math.random() * Math.PI * 2,
+      speed: Math.random() * .8 + .2
+    }));
+  }
+
+  function drawStars(time = 0) {
+    starCtx.clearRect(0, 0, sw, sh);
+    for (const s of stars) {
+      const twinkle = reducedMotion ? 1 : .72 + Math.sin(time * .0007 * s.speed + s.phase) * .28;
+      starCtx.beginPath();
+      starCtx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      starCtx.fillStyle = `rgba(211, 205, 255, ${s.a * twinkle})`;
+      starCtx.fill();
+    }
+    if (!reducedMotion) requestAnimationFrame(drawStars);
+  }
+  resizeStars();
+  drawStars();
+  window.addEventListener("resize", resizeStars);
+
+  // ---------------- REAL THREE.JS PLANET ----------------
+  const planetCanvas = $("#planet-canvas");
+  let renderer, scene, camera, planet, atmosphere, planetFrame;
+  let pointerDown = false, lastX = 0, lastY = 0;
+  let targetRX = .1, targetRY = 0;
+  let planetReady = false;
+
+  function seededRandom(seed) {
+    let x = seed >>> 0;
+    return () => {
+      x = (x * 1664525 + 1013904223) >>> 0;
+      return x / 4294967296;
+    };
+  }
+
+  function makePlanetTexture() {
+    const c = document.createElement("canvas");
+    c.width = 1024; c.height = 512;
+    const ctx = c.getContext("2d");
+    const gradient = ctx.createLinearGradient(0, 0, 1024, 512);
+    gradient.addColorStop(0, "#17143d");
+    gradient.addColorStop(.3, "#49308b");
+    gradient.addColorStop(.58, "#202b68");
+    gradient.addColorStop(.8, "#7649a7");
+    gradient.addColorStop(1, "#121b42");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 1024, 512);
+
+    const random = seededRandom(713);
+    for (let i = 0; i < 150; i++) {
+      const x = random() * 1024, y = random() * 512;
+      const w = 20 + random() * 100, h = 5 + random() * 25;
+      const g = ctx.createRadialGradient(x, y, 0, x, y, w);
+      g.addColorStop(0, random() > .5 ? "rgba(153,120,255,.35)" : "rgba(79,174,255,.25)");
+      g.addColorStop(1, "rgba(40,30,100,0)");
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.ellipse(x, y, w, h, random() * Math.PI, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    // Fine, low-contrast surface markings.
+    for (let i = 0; i < 1100; i++) {
+      const x = random() * 1024, y = random() * 512;
+      ctx.fillStyle = `rgba(205,190,255,${random() * .09})`;
+      ctx.fillRect(x, y, 1 + random() * 4, 1 + random() * 2);
+    }
+
+    const texture = new THREE.CanvasTexture(c);
+    texture.colorSpace = THREE.SRGBColorSpace;
+    return texture;
+  }
+
+  function initPlanet() {
+    if (!window.THREE) {
+      console.warn("Three.js did not load. Check your internet connection.");
+      $("#toast").textContent = "3D planet needs an internet connection to load.";
+      $("#toast").classList.add("show");
+      return;
+    }
+
+    try {
+      scene = new THREE.Scene();
+      camera = new THREE.PerspectiveCamera(38, 1, .1, 100);
+      camera.position.z = 5.2;
+
+      renderer = new THREE.WebGLRenderer({
+        canvas: planetCanvas, alpha: true, antialias: true,
+        powerPreference: "low-power"
+      });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.7));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.12;
+
+      scene.add(new THREE.AmbientLight(0x8899ff, 1.15));
+
+      const keyLight = new THREE.DirectionalLight(0xd8caff, 3.2);
+      keyLight.position.set(-3, 2, 4);
+      scene.add(keyLight);
+
+      const blueLight = new THREE.PointLight(0x429cff, 13, 12);
+      blueLight.position.set(3, -1, 2);
+      scene.add(blueLight);
+
+      const geometry = new THREE.SphereGeometry(1.48, 96, 96);
+      const material = new THREE.MeshStandardMaterial({
+        map: makePlanetTexture(),
+        roughness: .88,
+        metalness: .08
+      });
+      planet = new THREE.Mesh(geometry, material);
+      scene.add(planet);
+
+      // Atmospheric rim glow.
+      const atmosphereGeometry = new THREE.SphereGeometry(1.55, 64, 64);
+      const atmosphereMaterial = new THREE.ShaderMaterial({
+        uniforms: { glowColor: { value: new THREE.Color("#7774ff") } },
+        vertexShader: `
+          varying vec3 vNormal;
+          varying vec3 vViewPosition;
+          void main() {
+            vNormal = normalize(normalMatrix * normal);
+            vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+            vViewPosition = -mvPosition.xyz;
+            gl_Position = projectionMatrix * mvPosition;
+          }
+        `,
+        fragmentShader: `
+          uniform vec3 glowColor;
+          varying vec3 vNormal;
+          varying vec3 vViewPosition;
+          void main() {
+            float intensity = pow(0.75 - dot(normalize(vNormal), normalize(vViewPosition)), 3.0);
+            gl_FragColor = vec4(glowColor, clamp(intensity, 0.0, 0.65));
+          }
+        `,
+        transparent: true,
+        blending: THREE.AdditiveBlending,
+        side: THREE.BackSide,
+        depthWrite: false
+      });
+      atmosphere = new THREE.Mesh(atmosphereGeometry, atmosphereMaterial);
+      scene.add(atmosphere);
+
+      // Small moon.
+      const moon = new THREE.Mesh(
+        new THREE.SphereGeometry(.105, 24, 24),
+        new THREE.MeshStandardMaterial({ color: "#a4b8ff", roughness: .65 })
+      );
+      moon.position.set(1.95, .7, .2);
+      scene.add(moon);
+      planet.userData.moon = moon;
+
+      function resizePlanet() {
+        const rect = planetCanvas.getBoundingClientRect();
+        const w = Math.max(1, rect.width);
+        const h = Math.max(1, rect.height);
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+
+      resizePlanet();
+      new ResizeObserver(resizePlanet).observe(planetCanvas);
+      planetReady = true;
+
+      const clock = new THREE.Clock();
+      function animatePlanet() {
+        planetFrame = requestAnimationFrame(animatePlanet);
+        const t = clock.getElapsedTime();
+
+        if (!pointerDown && !reducedMotion) targetRY += .0017;
+        planet.rotation.y += (targetRY - planet.rotation.y) * .055;
+        planet.rotation.x += (targetRX - planet.rotation.x) * .055;
+        atmosphere.rotation.copy(planet.rotation);
+        planet.userData.moon.position.x = Math.cos(t * .34) * 2.02;
+        planet.userData.moon.position.z = Math.sin(t * .34) * .75;
+        planet.userData.moon.position.y = Math.sin(t * .2) * .35;
+        renderer.render(scene, camera);
+      }
+      animatePlanet();
+
+      planetCanvas.addEventListener("pointerdown", (e) => {
+        pointerDown = true;
+        lastX = e.clientX; lastY = e.clientY;
+        planetCanvas.setPointerCapture(e.pointerId);
+      });
+      planetCanvas.addEventListener("pointermove", (e) => {
+        if (!pointerDown) return;
+        const dx = e.clientX - lastX, dy = e.clientY - lastY;
+        targetRY += dx * .008;
+        targetRX = Math.max(-.8, Math.min(.8, targetRX + dy * .005));
+        lastX = e.clientX; lastY = e.clientY;
+      });
+      const stopDrag = () => { pointerDown = false; };
+      planetCanvas.addEventListener("pointerup", stopDrag);
+      planetCanvas.addEventListener("pointercancel", stopDrag);
+    } catch (error) {
+      console.error("Could not initialize the 3D planet:", error);
+    }
+  }
+
+  initPlanet();
+
+  // ---------------- SUBTLE CURSOR GLOW ----------------
+  const cursorGlow = $("#cursor-glow");
+  if (!isTouch && cursorGlow) {
+    window.addEventListener("pointermove", (e) => {
+      cursorGlow.style.left = e.clientX + "px";
+      cursorGlow.style.top = e.clientY + "px";
+    }, { passive: true });
+  }
+
+  // ---------------- REVEAL ON SCROLL ----------------
+  const revealItems = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && !reducedMotion) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12 });
+    revealItems.forEach((el) => observer.observe(el));
+  } else {
+    revealItems.forEach((el) => el.classList.add("visible"));
+  }
+
+  // ---------------- COSMIC CONFETTI ----------------
+  const confettiCanvas = $("#cosmic-confetti");
+  const confettiCtx = confettiCanvas.getContext("2d");
+  let confetti = [];
+  let confettiRAF = 0;
+
+  function resizeConfetti() {
+    const ratio = Math.min(window.devicePixelRatio || 1, 2);
+    confettiCanvas.width = innerWidth * ratio;
+    confettiCanvas.height = innerHeight * ratio;
+    confettiCanvas.style.width = innerWidth + "px";
+    confettiCanvas.style.height = innerHeight + "px";
+    confettiCtx.setTransform(ratio, 0, 0, ratio, 0, 0);
+  }
+  resizeConfetti();
+  window.addEventListener("resize", resizeConfetti);
+
+  function burst(x, y, amount = 26) {
+    if (reducedMotion) return;
+    const symbols = ["✦", "✧", "·", "✳", "＋"];
+    for (let i = 0; i < amount; i++) {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 1.1 + Math.random() * 4.3;
+      confetti.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 1,
+        life: 1,
+        decay: .012 + Math.random() * .018,
+        size: 7 + Math.random() * 13,
+        symbol: symbols[Math.floor(Math.random() * symbols.length)],
+        color: ["#c5a7ff", "#64c7ff", "#ee9bff", "#ffffff"][Math.floor(Math.random() * 4)]
+      });
+    }
+    if (!confettiRAF) animateConfetti();
+  }
+
+  function animateConfetti() {
+    confettiRAF = 0;
+    confettiCtx.clearRect(0, 0, innerWidth, innerHeight);
+    confetti = confetti.filter(p => p.life > 0);
+    for (const p of confetti) {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += .035;
+      p.vx *= .992;
+      p.life -= p.decay;
+      confettiCtx.globalAlpha = Math.max(0, p.life);
+      confettiCtx.fillStyle = p.color;
+      confettiCtx.font = `${p.size}px sans-serif`;
+      confettiCtx.fillText(p.symbol, p.x, p.y);
+    }
+    confettiCtx.globalAlpha = 1;
+    if (confetti.length) confettiRAF = requestAnimationFrame(animateConfetti);
+  }
+
+  document.addEventListener("click", (e) => {
+    const interactive = e.target.closest("a, button");
+    if (!interactive) return;
+    burst(e.clientX, e.clientY, interactive.matches("[data-burst]") ? 34 : 12);
+  });
+
+  // ---------------- SOUND: OFF BY DEFAULT ----------------
+  let audioContext = null;
+  let masterGain = null;
+  let soundOn = false;
+  let soundNodes = [];
+
+  function startAmbientSound() {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) {
+      showToast("Ambient audio isn't supported in this browser.");
+      return false;
+    }
+
+    try {
+      audioContext = audioContext || new AudioContextClass();
+      if (audioContext.state === "suspended") audioContext.resume();
+
+      masterGain = audioContext.createGain();
+      masterGain.gain.value = .0001;
+      masterGain.connect(audioContext.destination);
+      masterGain.gain.setTargetAtTime(.018, audioContext.currentTime, .7);
+
+      // A quiet, synthesized ambient pad; no audio file is downloaded.
+      [110, 164.81, 220].forEach((freq, i) => {
+        const osc = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        osc.type = i === 1 ? "sine" : "triangle";
+        osc.frequency.value = freq;
+        gain.gain.value = i === 1 ? .14 : .1;
+        osc.connect(gain);
+        gain.connect(masterGain);
+        osc.start();
+        soundNodes.push(osc, gain);
+      });
+      return true;
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
+  }
+
+  function stopAmbientSound() {
+    if (!audioContext || !masterGain) return;
+    masterGain.gain.setTargetAtTime(.0001, audioContext.currentTime, .15);
+    window.setTimeout(() => {
+      soundNodes.forEach(node => {
+        try { if (node.stop) node.stop(); } catch (_) {}
+        try { node.disconnect(); } catch (_) {}
+      });
+      soundNodes = [];
+      try { masterGain.disconnect(); } catch (_) {}
+      masterGain = null;
+    }, 900);
+  }
+
+  $("#sound-toggle").addEventListener("click", () => {
+    soundOn = !soundOn;
+    if (soundOn) {
+      const started = startAmbientSound();
+      if (!started) {
+        soundOn = false;
+        return;
+      }
+      $("#sound-toggle").textContent = "♫ SOUND: ON";
+      $("#sound-toggle").setAttribute("aria-pressed", "true");
+      showToast("Ambient sound enabled.");
+    } else {
+      stopAmbientSound();
+      $("#sound-toggle").textContent = "♫ SOUND: OFF";
+      $("#sound-toggle").setAttribute("aria-pressed", "false");
+      showToast("Ambient sound disabled.");
+    }
+  });
+
+  let toastTimer;
+  function showToast(message) {
+    const toast = $("#toast");
+    toast.textContent = message;
+    toast.classList.add("show");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+  }
+
+  // Pause animation work when the tab is hidden to save resources.
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && planetFrame) {
+      cancelAnimationFrame(planetFrame);
+      planetFrame = 0;
+    } else if (!document.hidden && planetReady && !planetFrame) {
+      // Reinitialize the rendering loop without recreating the scene.
+      const tick = () => {
+        if (document.hidden || !renderer) { planetFrame = 0; return; }
+        if (!pointerDown && !reducedMotion) targetRY += .0017;
+        planet.rotation.y += (targetRY - planet.rotation.y) * .055;
+        planet.rotation.x += (targetRX - planet.rotation.x) * .055;
+        atmosphere.rotation.copy(planet.rotation);
+        renderer.render(scene, camera);
+        planetFrame = requestAnimationFrame(tick);
+      };
+      tick();
+    }
+  });
+})();
+</script>
+</body>
+</html>
+```
